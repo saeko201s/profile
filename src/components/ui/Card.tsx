@@ -4,12 +4,13 @@ import { cn } from "@/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardProps {
   children: React.ReactNode;
   tilt?: boolean;
+  className?: string;
 }
 
-export function Card({ children, className, tilt = true, ...props }: CardProps) {
+export function Card({ children, className, tilt = true }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -58,7 +59,6 @@ export function Card({ children, className, tilt = true, ...props }: CardProps) 
         "glass rounded-2xl p-6 shadow-sm transition-shadow hover:shadow-md",
         className
       )}
-      {...props}
     >
       <div
         style={{
@@ -71,3 +71,4 @@ export function Card({ children, className, tilt = true, ...props }: CardProps) 
     </motion.div>
   );
 }
+
