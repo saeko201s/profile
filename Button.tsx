@@ -1,17 +1,21 @@
 "use client";
 
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-interface ButtonProps extends HTMLMotionProps<"button"> {
+interface ButtonProps {
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   children?: React.ReactNode;
+  className?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", children, onClick, type, disabled }, ref) => {
     const fallbackRef = useRef<HTMLButtonElement>(null);
     const buttonRef = (ref as React.RefObject<HTMLButtonElement>) || fallbackRef;
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -29,7 +33,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       setPosition({ x: 0, y: 0 });
     };
 
-    const variants = {
+    const variantStyles = {
       primary: "bg-accent text-white hover:bg-accentLight shadow-md border border-accent",
       secondary: "bg-surface text-textPrimary hover:bg-border shadow-sm border border-border",
       outline: "border-2 border-accent text-accent hover:bg-accent/10",
@@ -45,17 +49,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <motion.button
         ref={buttonRef}
+        type={type}
+        disabled={disabled}
+        onClick={onClick}
         onMouseMove={handleMouse}
         onMouseLeave={reset}
         animate={{ x: position.x, y: position.y }}
         transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
         className={cn(
           "relative inline-flex items-center justify-center rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 overflow-hidden group",
-          variants[variant],
+          variantStyles[variant],
           sizes[size],
           className
         )}
-        {...props}
       >
         <span className="relative z-10 flex items-center gap-2">{children}</span>
         {variant === "primary" && (
@@ -66,3 +72,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 Button.displayName = "Button";
+
