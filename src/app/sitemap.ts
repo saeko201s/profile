@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Replace with your actual domain when deploying
-  const baseUrl = "https://yourdomain.com";
+  const baseUrl = "https://psyz1.vercel.app/";
 
   return [
     {

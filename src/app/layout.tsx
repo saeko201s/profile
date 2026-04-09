@@ -11,7 +11,7 @@ const cairo = Cairo({ subsets: ["arabic"], variable: "--font-arabic-body", weigh
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://psyz1.vercel.app/"),
   title: {
     default: "محمد | مطوّر برمجيات",
     template: "%s | محمد"
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ar_AE",
-    url: "https://yourdomain.com",
+    url: "https://psyz1.vercel.app/",
     title: "محمد | مطوّر برمجيات",
     description: "أقوم ببناء واجهات مستخدم تفاعلية وأنظمة خلفية قوية وتجارب رقمية استثنائية.",
     siteName: "محمد | Portfolio",
